@@ -1,0 +1,20 @@
+Terminal:
+django-admin startproject mysite # создаёт проект
+django-admin startapp news # создает приложение
+python manage.py runserver # запускает сайт
+python manage.py makemigrations # создаёт миграции
+python manage.py sqlmigrate news 0001 # показывает sql запрос для создания базы данных
+python manage.py migrate # применяет миграции
+
+
+python manage.py shell # Открытие консоли python в терминале
+
+
+Python console:
+from news.models import News # импортирование модели
+News(title='Новость 1', content='Контент новости 1') # Создание
+news1 = _ # присваивание имени созданной модели
+news1.save() # сохранение созданной модели
+_ # предыдушая переменная(объект)
+news1.title ... # обращение к обьекту
+news.id # id объекта
