@@ -30,6 +30,7 @@ def add_news(request):
         if form.is_valid():
             # WithOutModel
             #news = News.objects.create(**form.cleaned_data)
+            # WithModel
             news = form.save()
             return redirect(news)
     else:
