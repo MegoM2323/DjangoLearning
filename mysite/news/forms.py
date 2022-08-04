@@ -23,7 +23,7 @@ class NewsForm(forms.ModelForm):
         else:
             return title
 
-
+'''
 class NewsForm_WithOutModel(forms.Form):
     title = forms.CharField(max_length=150, label='Наименование',
                             widget=forms.TextInput(attrs={'class': 'form-control'}))
@@ -32,3 +32,4 @@ class NewsForm_WithOutModel(forms.Form):
     is_published = forms.BooleanField(label='Опубликовать?', initial=True)
     category = forms.ModelChoiceField(queryset=Category.objects.all(), widget=forms.Select, label='Категория',
                                       empty_label=None)
+'''
