@@ -20,3 +20,50 @@ news1.title ... # обращение к обьекту
 news.id # id объекта
 
 News.objects.create()
+
+cat4 = Category.objects.get(pk=4)
+cat4.news_set.all() # все связанные модели связанные с первичной моделью
+cat4 = _
+for item in cat4:
+    print(item.title)
+
+News.objects.filter(id__<Название фильтра (look_up) = ... >) # Использование фильтров в ORM
+
+News.objects.order().first() #первая новость
+
+News.objects.filter(category__title = 'Спорт') # новости с категорией спорт
+Category.objects.filter(news__title__contains = 'формы') #категории в названии у которых "формы"
+Category.objects.filter(news__title__contains = 'формы').distinct() #категории в названии у которых "формы" уникальные значения
+
+from django.db.models import Q # | & ~
+# Q() | Q()
+
+from django.db.models import *
+News.objects.agregate(Min('views'), Max('views'))
+{views_min: 0, views_max: 0}
+News.objects.agregate(mi = Min('views'), ma = Max('views'))
+{mi: 0, ma: 0}
+
+cats = Category.objects.annotate(Count('news'))
+for item in cats:
+    print(item.title, item.news__count)
+
+news = News.objects.values('title', 'views').get(pk=1) # только выбранные поля
+
+from django.db.models import F # сравниваем одного с другим не константой
+news.views = F("views") + 1
+news.save()
+
+News.objects.filter(content__icontains = F('title')) #Новость тайтл который находится в контете
+
+
+from django.db.models.function import Length # для переноса части вычислений на сервер
+
+News.objects.raw("Любой SQL запрос")
+News.objects.raw("SELECT * FROM news_news")
+news = _
+for item in news:
+    print(item.title, item.pk, item.is_published)
+
+
+news = News.objects.raw("SELECT * FROM news_news WHETHE title = %s", ['News 5']) # защита от sql инекций
